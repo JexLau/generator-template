@@ -39,3 +39,7 @@
 //     exec(`npm version ${answer.selected} && npm run build`);
 //   }
 // });
+
+// read index.json
+
+// node fs.write() 
