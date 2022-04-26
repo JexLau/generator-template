@@ -17,7 +17,7 @@ export default {
       /** table data */
       list: [],
       /** table columns */
-      columns: [],
+      columns: [{"title":"品类名称","key":"nickname"},{"title":"操作","type":"operate","width":300,"operates":[{"name":"编辑","emitKey":"edit_click","type":"warning","width":80},{"name":"删除","emitKey":"delete_click","type":"danger","width":80}]}],
     };
   },
   mounted() {
@@ -37,11 +37,28 @@ export default {
           this.errorTip('search failed');
         });
     },
-    edit_click() {
-      console.log("edit_click")
+    edit_click(data) {
+      this.dialogActionAdd = false;
+      this.selectedItem = JSON.parse(JSON.stringify(data));
+      this.$refs['add_edit_form'].open();
     },
-    delete_click() {
-      console.log("delete_click")
+    delete_click(data) {
+      this.deleteTip(
+        '确认删除此项数据吗?，若要重新添加请联系管理员！！',
+        (_) => {
+          this.delete_comfire(data.id);
+        }
+      );
+    },
+    delete_comfire(id) {
+      this.$api['reverso/delete']({ id: id })
+        .then((res) => {
+          this.get_list();
+          this.successTip('删除成功');
+        })
+        .catch((_) => {
+          this.errorTip('删除失败');
+        });
     },
   },
 };

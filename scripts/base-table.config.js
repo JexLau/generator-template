@@ -23,7 +23,13 @@ const baseTableConfig = {
     ]
   }],
   apiModuleName: "reverso",
+  selectedItem: {
+
+  },
+  // 自定义edit_click函数
   edit_click: () => {console.log("edit_click")},
+  // 自定义delete_click函数
   delete_click: () => {console.log("delete_click")},
 }
 
+exports.baseTableConfig = baseTableConfig
